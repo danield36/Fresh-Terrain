@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react'
 export interface TimetableHook {
     timetableMode: CalendarMode
     setTimetableMode: (mode: CalendarMode) => void
+    selectedDate: Date
+    setSelectedDate: (date: Date) => void
 }
 
-export const DEFAULT_TIMETABLE_MODE: CalendarMode = 'list'
+export const DEFAULT_TIMETABLE_MODE: CalendarMode = '3days'
 
 /**
  * Custom hook that manages the users timetable mode.
@@ -18,6 +20,7 @@ export function useTimetable(): TimetableHook {
     const [timetableMode, setMode] = useState<CalendarMode>(
         DEFAULT_TIMETABLE_MODE
     )
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 
     useEffect(() => {
         const loadAsyncStorageData = async (): Promise<void> => {
@@ -48,5 +51,7 @@ export function useTimetable(): TimetableHook {
     return {
         timetableMode,
         setTimetableMode,
+        selectedDate,
+        setSelectedDate,
     }
 }
